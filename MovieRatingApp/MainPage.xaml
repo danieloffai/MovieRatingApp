@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ratingControl="clr-namespace:Maui.Controls.RatingView;assembly=Maui.Controls.RatingView"
+             x:Class="MovieRatingApp.MainPage"
+             xmlns:viewmodel="clr-namespace:MovieRatingApp.Models"
+             x:DataType="viewmodel:MainPageModel"
+             xmlns:movietype="clr-namespace:MovieRatingApp.Classes">
+    
+    <ScrollView>
+        <CollectionView ItemsSource="{Binding Movies}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="movietype:Movie">
+                    <Frame Margin="10">
+                        <VerticalStackLayout>
+                            <Image  Source="{Binding MoviePicture}"
+                                    HeightRequest="100"
+                                    HorizontalOptions="Center"/>
+                            <Label Text="{Binding MovieName}"
+                                    FontSize="20"
+                                    HorizontalOptions="Center"/>
+                            <ratingControl:RatingView x:Name="myRatingView"
+                                    StarCountFilled="{Binding Stars}"
+                                    StarColor="{Binding Color}"
+                                    Tapped="MyRatingView_Tapped" 
+                                    BindingContext="{Binding .}"/>
+                        </VerticalStackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </ScrollView>
+</ContentPage>
